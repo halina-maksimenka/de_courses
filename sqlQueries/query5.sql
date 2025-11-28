@@ -10,12 +10,12 @@ WITH movies AS
      ON   f.film_id = fc.film_id
    JOIN   category cat
      ON   fc.category_id = cat.category_id
-    AND   cat.name LIKE 'Children'
+    AND   cat.name LIKE 'Children' /* оптимальнее будет = 'Children' */
  ),
  -- number of films for actors in the “Children” category
 number_of_films AS
 (
-SELECT DISTINCT a.first_name as "first_name"
+SELECT DISTINCT a.first_name as "first_name" /* использовать дистинкт в запросе с групп бай может быть излишне. попробуй без него и сравни результаты */
        , a.last_name as "last_name"
 	   , COUNT(fa.film_id) as "count_films"
 FROM   actor a
@@ -38,3 +38,4 @@ rank_all_actors AS
 SELECT *
 FROM rank_all_actors
 WHERE rank < 4
+

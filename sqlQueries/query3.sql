@@ -32,3 +32,7 @@ JOIN   money_movies
   ON   f.film_id = money_movies.film_id
 ORDER BY money_movies.money DESC
 LIMIT 1
+
+	 /*
+Решение не соответствует условию
+	*/

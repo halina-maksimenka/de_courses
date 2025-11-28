@@ -24,8 +24,8 @@ JOIN   film_category fc
 JOIN   category cut
   ON   fc.category_id = cut.category_id
 GROUP BY 1, 2
-HAVING c.city LIKE 'a%'
-AND    SUM(EXTRACT(epoch FROM r.return_date - r.rental_date)/3600) IS NOT NULL
+HAVING c.city LIKE 'a%' /* Отпиши пожалуйста почему тут реализован having */ 
+AND    SUM(EXTRACT(epoch FROM r.return_date - r.rental_date)/3600) IS NOT NULL /* Отпиши пожалуйста почему тут проверка not null */ 
 ORDER BY 3 DESC
 LIMIT 1
 )

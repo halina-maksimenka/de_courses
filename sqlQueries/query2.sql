@@ -23,3 +23,7 @@ JOIN   movies
   ON   f.film_id = movies.film_id
 ORDER BY movies.number_of_rents DESC
 LIMIT 10
+
+	 /*
+Решение не соответствует условию, перепроверь группировку
+	*/

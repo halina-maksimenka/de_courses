@@ -12,3 +12,8 @@ JOIN   address a
 JOIN   customer cust
   ON   a.address_id = cust.address_id
 ORDER BY inactive_cust DESC
+
+	 /*
+Решение рабочее, но неоптимальное. Причина в использовании distinct и оконных функций. 
+Корректно ли условие cust.active <> 1 ? Что произойдёт если значение будет null?
+	*/
