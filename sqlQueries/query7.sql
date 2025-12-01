@@ -23,9 +23,9 @@ JOIN   film_category fc
   ON   f.film_id = fc.film_id
 JOIN   category cut
   ON   fc.category_id = cut.category_id
+WHERE  c.city LIKE 'a%'
+AND    r.return_date IS NOT NULL
 GROUP BY 1, 2
-HAVING c.city LIKE 'a%' /* Отпиши пожалуйста почему тут реализован having */ 
-AND    SUM(EXTRACT(epoch FROM r.return_date - r.rental_date)/3600) IS NOT NULL /* Отпиши пожалуйста почему тут проверка not null */ 
 ORDER BY 3 DESC
 LIMIT 1
 )
@@ -49,9 +49,16 @@ JOIN   film_category fc
   ON   f.film_id = fc.film_id
 JOIN   category cut
   ON   fc.category_id = cut.category_id
+WHERE  c.city LIKE '%-%'
+AND    r.return_date IS NOT NULL
 GROUP BY 1, 2
-HAVING c.city LIKE '%-%'
-AND    SUM(EXTRACT(epoch FROM r.return_date - r.rental_date)/3600) IS NOT NULL
 ORDER BY 3 DESC
 LIMIT 1
 )
+/*
+   Переписала запрос с условием WHERE.
+   Почему я делаю проверку r.return_date IS NOT NULL.
+   Я заметила, что есть записи в таблице, где rental_date установлен, а r.return_date - нет.
+   Т.е. клиент взял что-то в прокат, но еще не вернул. 
+   А я считаю разницу r.return_date - r.rental_date, чтобы установить время проката.
+*/
